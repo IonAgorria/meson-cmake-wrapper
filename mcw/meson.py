@@ -79,10 +79,11 @@ class Meson:
 
     def get_project_name(self):
         if not self.c_project_name:
-            if self.get_version()[1] >= 49:
-                attr = 'descriptive_name'
-            else:
+            version = self.get_version()
+            if version[0] == 0 and version[1] < 49:
                 attr = 'name'
+            else:
+                attr = 'descriptive_name'
             self.c_project_name = self.get_project_info()[attr]
         return self.c_project_name
 
